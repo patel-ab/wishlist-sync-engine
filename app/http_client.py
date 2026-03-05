@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Optional
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+import json
 
 from app.config import AppConfig
 
@@ -64,6 +65,8 @@ class WishlistApiClient:
             raise RuntimeError(f"Wishlist API error {response.status_code}: {response.text[:500]}")
 
         data = response.json()
+        #print(json.dumps(data, indent=2, ensure_ascii=False, default=str))
+        #print("\nIncpmiong Response Complete\n")
 
         # Accept both: list OR {"wishlists": list}
         if isinstance(data, list):

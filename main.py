@@ -1,6 +1,7 @@
 from app.config import load_config
 from app.http_client import WishlistApiClient
 from app.validator import WishlistValidator
+import json
 
 
 def main() -> None:
@@ -14,11 +15,11 @@ def main() -> None:
 
     result = validator.validate_data(raw_items)
 
-    print(f"Fetched: {len(raw_items)}")
-    print(f"Valid:   {len(result.valid)}")
-    print(f"Invalid: {len(result.invalid)}")
+    #print(f"Fetched: {len(raw_items)}")
+    #print(f"Valid:   {len(result.valid)}")
+    #print(f"Invalid: {len(result.invalid)}")
 
-    print(f"{raw_items}")
+    print(json.dumps([w.model_dump() for w in result.valid], indent=2, ensure_ascii=False, default=str))
 
     # Show first error if any (good for debugging)
     if result.invalid:

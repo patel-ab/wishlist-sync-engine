@@ -12,7 +12,7 @@ class OwnerDTO(BaseModel):
     id: Optional[int] = None  # Gift Reggie internal user ID
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-
+    customer_id: Optional[int] = None
     # Need to discuss with team
     model_config = ConfigDict(extra="allow") 
     # extra="forbid" means:
@@ -34,6 +34,7 @@ class WishlistProductDTO(BaseModel):
     image: Optional[str] = None
     inventory_quantity: Optional[int] = None
     tags: Optional[str] = None
+    handle: Optional[str] = None
 
      # Need to discuss with team
     model_config = ConfigDict(extra="allow")
@@ -51,11 +52,7 @@ class WishlistDTO(BaseModel):
 
     # Gift Reggie seems to send "updated" too, so we model it
     updated: Optional[datetime] = None
-
     extra: Optional[str] = None
-
     owner: Optional[OwnerDTO] = None
-
     products: List[WishlistProductDTO] = Field(default_factory=list)
-
     model_config = ConfigDict(extra="forbid")
