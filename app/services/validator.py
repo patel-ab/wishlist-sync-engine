@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import ValidationError
 
-from app.gift_reggie_schema import WishlistDTO
+from app.schemas.gift_reggie_schema import WishlistDTO
 
 
 @dataclass(frozen=True)

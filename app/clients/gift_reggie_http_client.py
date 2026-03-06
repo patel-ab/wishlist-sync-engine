@@ -5,7 +5,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import json
 
-from app.config import AppConfig
+from app.config.gift_reggie_config import AppConfig
 
 
 class WishlistApiClient:

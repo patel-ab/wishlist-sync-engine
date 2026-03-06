@@ -12,7 +12,7 @@ class AppConfig:
     api_auth_mode: str
     api_token_param: str
 
-def load_config() -> AppConfig:
+def load_gift_reggie_config() -> AppConfig:
     load_dotenv()
 
     api_base_url = os.getenv("API_BASE_URL", "").rstrip("/")
