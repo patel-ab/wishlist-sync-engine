@@ -58,7 +58,7 @@ def main() -> None:
     
     incoming_raw_items = gift_reggie_client.get_all_wishlists(
         rows=gift_reggie_config.default_rows,
-        updated=query_parameter_updated_after,
+        updated=None,
     )
     
     #Testing Purpose
@@ -67,6 +67,9 @@ def main() -> None:
 
     print("----- RAW API RESPONSE SAMPLE -----")
     print(json.dumps(incoming_raw_items[:2], indent=2, ensure_ascii=False, default=str))
+    
+    print("RAW API ITEMS:", incoming_raw_items[:5])
+    print("TOTAL ITEMS:", len(incoming_raw_items))
 
     # -----------------------------
     # Validate Incoming Data

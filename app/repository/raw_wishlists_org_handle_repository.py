@@ -52,7 +52,15 @@ class RawWishlistOrgHandlesRepository:
             last_run_id = EXCLUDED.last_run_id
         """
 
-        payload = [asdict(row) for row in rows]
+        payload = []
+        
+        for row in rows:
+            row_dict = asdict(row)
+
+            if row_dict.get("last_run_id") is not None:
+                row_dict["last_run_id"] = str(row_dict["last_run_id"])
+
+            payload.append(row_dict)
 
         with self.connection.cursor() as cursor:
             cursor.executemany(sql, payload)
@@ -83,11 +91,11 @@ class RawWishlistOrgHandlesRepository:
               AND removed_at IS NULL
             """
             params = {
-                "wishlist_id": wishlist_id,
+                "wishlist_id": str(wishlist_id),
                 "active_org_handles": active_org_handles,
                 "removed_at": removed_at,
                 "synced_at": synced_at,
-                "last_run_id": run_id,
+                "last_run_id": str(run_id),
             }
         else:
             sql = """
@@ -100,10 +108,10 @@ class RawWishlistOrgHandlesRepository:
               AND removed_at IS NULL
             """
             params = {
-                "wishlist_id": wishlist_id,
+                "wishlist_id": str(wishlist_id),
                 "removed_at": removed_at,
                 "synced_at": synced_at,
-                "last_run_id": run_id,
+                "last_run_id": str(run_id),
             }
 
         with self.connection.cursor() as cursor:

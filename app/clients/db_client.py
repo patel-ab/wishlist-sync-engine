@@ -1,8 +1,10 @@
 import psycopg2
+import os
 from psycopg2.extensions import connection as PgConnection
 
 from app.config.db_connection_config import DBConfig
 
+sslmode = os.getenv("DB_SSLMODE")
 
 class PostgresClient:
     def __init__(self, config: DBConfig) -> None:
@@ -19,4 +21,5 @@ class PostgresClient:
             dbname=self._db_name,
             user=self._user,
             password=self._password,
+            sslmode=sslmode
         )
