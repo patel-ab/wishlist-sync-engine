@@ -48,6 +48,6 @@ class LastSyncRepository:
         with self.connection.cursor() as cursor:
             cursor.execute(sql, {
                 "sync_name": row.sync_name,
-                "last_run_id": row.last_run_id,
+                "last_run_id": str(row.last_run_id),
                 "last_run_time": row.last_run_time,
             })

@@ -52,7 +52,15 @@ class RawWishlistsRepository:
         """
 # For conflict - Remove all the columns from above that we 
 # donot want to update if the row already exists.
-        payload = [asdict(row) for row in rows]
+        payload = []
+        
+        for row in rows:
+            row_dict = asdict(row)
+            
+            if row_dict.get("last_run_id") is not None:
+                row_dict["last_run_id"] = str(row_dict["last_run_id"])
+                
+            payload.append(row_dict)
 
         with self.connection.cursor() as cursor:
             cursor.executemany(sql, payload)
