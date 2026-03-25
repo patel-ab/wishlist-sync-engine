@@ -19,4 +19,5 @@ class PostgresClient:
             dbname=self._db_name,
             user=self._user,
             password=self._password,
+            sslmode="require"
         )
